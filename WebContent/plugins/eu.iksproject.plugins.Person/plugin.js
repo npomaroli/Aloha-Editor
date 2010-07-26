@@ -11,6 +11,12 @@ eu.iksproject.LoaderPlugin.loadAsset('eu.iksproject.plugins.Person', 'person', '
 
 eu.iksproject.PersonPlugin.languages = ['en', 'fi'];
 
+eu.iksproject.Utils.RDFa.registerNamespaceHandler(
+    'eu.iksproject.plugins.Person', // pluginPrefix
+    'http://rdf.data-vocabulary.org/#', // namespace
+    ['Person'] // Supported classes from the namespace
+);
+
 /**
  * Initialize the plugin, register the buttons
  */
@@ -19,6 +25,14 @@ eu.iksproject.PersonPlugin.init = function() {
 	
 	this.initButtons();
 	this.initPanel();
+};
+
+/**
+ * Expose a nice name for the Plugin
+ * @hide
+ */
+eu.iksproject.PersonPlugin.toString = function() {
+	return "eu.iksproject.plugins.Person";
 };
 
 eu.iksproject.PersonPlugin.initButtons = function() {
@@ -30,16 +44,17 @@ eu.iksproject.PersonPlugin.initButtons = function() {
 		'onclick' : function (element, event) {
 			if (GENTICS.Aloha.activeEditable) {
 				GENTICS.Aloha.activeEditable.obj[0].focus();
-			}			
-			var markup = jQuery('<span />').attr({
-			    'xmlns:v': 'http://rdf.data-vocabulary.org/#',
-			    'typeof': 'v:Person',
-			    'property': 'v:name'
-			});
+			}
+			
+			var markup = new eu.iksproject.Utils.RDFa.Element('http://rdf.data-vocabulary.org/#', 'Person', {'shortHandle': 'v'});
+			markup.addProperty('name');
+			markup.addProperty('url');
+			
 			var rangeObject = GENTICS.Aloha.Selection.rangeObject;
-
+            
 			// add the markup
-			GENTICS.Utils.Dom.addMarkup(rangeObject, markup);
+			GENTICS.Utils.Dom.addMarkup(rangeObject, markup.getElement());
+			//GENTICS.Utils.Dom.addMarkup(rangeObject, markup.getProperty('name').getElementTree()); //this is the same thing
             
 			// select the modified range
 			rangeObject.select();
