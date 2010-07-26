@@ -54,6 +54,16 @@ eu.iksproject.PersonPlugin.initButtons = function() {
 			// add the markup
 			GENTICS.Utils.Dom.addMarkup(rangeObject, markup.getElement());
 			//GENTICS.Utils.Dom.addMarkup(rangeObject, markup.getProperty('name').getElementTree()); //this is the same thing
+			}			
+			var markup = jQuery('<span />').attr({
+			    'xmlns:v': 'http://rdf.data-vocabulary.org/#',
+			    'typeof': 'v:Person',
+			    'property': 'v:name'
+			});
+			var rangeObject = GENTICS.Aloha.Selection.rangeObject;
+
+			// add the markup
+			GENTICS.Utils.Dom.addMarkup(rangeObject, markup);
             
 			// select the modified range
 			rangeObject.select();
