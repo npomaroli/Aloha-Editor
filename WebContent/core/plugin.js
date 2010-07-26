@@ -26,6 +26,21 @@ GENTICS.Aloha.PluginRegistry.prototype.register = function(plugin) {
 };
 
 /**
+ * Get Plugin instance by pluginPrefix
+ * @param {String} pluginPrefix unique plugin prefix
+ * @return {Plugin} registered plugin
+ */
+GENTICS.Aloha.PluginRegistry.prototype.getInstance = function(pluginPrefix) {
+    for (var i=0; i<this.plugins.length;i++) {
+        if (this.plugins[i].toString() == pluginPrefix) {
+            return this.plugins[i];
+        }
+    }
+    
+    return false;
+};
+
+/**
  * Initialize all registered plugins
  * @return void
  * @hide
