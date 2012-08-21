@@ -80,7 +80,8 @@ define([
 			floating.makeFloating(this, Toolbar);
 		},
 
-		adoptInto: function(slot, component){
+		adoptInto: function (slot, component) {
+			// TODO implement the logic to find the correct slot by wildcard here
 			var tab = this._tabBySlot[slot];
 			return tab && tab.adoptInto(slot, component);
 		},

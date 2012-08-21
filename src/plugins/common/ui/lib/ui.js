@@ -152,7 +152,20 @@ function(
 		return component;
 	}
 
+	/**
+	 * Merge the given config into the already existing configuration
+	 * 
+	 * @param {Object} config
+	 *        Configuration of components
+	 * @return {Object} merged config
+	 * @api
+	 */
+	function mergeConfig(config) {
+		return UiPlugin.mergeConfig(config);
+	}
+
 	return {
-		adopt: adopt
+		adopt: adopt,
+		mergeConfig: mergeConfig
 	};
 });

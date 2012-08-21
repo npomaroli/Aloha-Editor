@@ -90,8 +90,16 @@ define('format/format-plugin', [
 			'h5': true,
 			'h6': true,
 			'pre': true
+		},
+		config = {
+			toolbar: {
+				tabs: [{
+					id: 'format',
+					components: [['bold', 'italic', 'underline'], 'formatBlock']
+				}]
+			}
 		};
-	
+
 	// extracted selection changed function
 	function onSelectionChanged(formatPlugin, rangeObject) {
 		// iterate over all buttons
@@ -283,6 +291,9 @@ define('format/format-plugin', [
 					// scopes completely.
 					scope = 'Aloha.continuoustext',
 					that = this;
+
+				// merge the config
+				Ui.mergeConfig(config);
 
 				// reset
 				this.buttons = {};
