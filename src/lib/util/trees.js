@@ -35,6 +35,10 @@
  * flatten(form)
  *
  *     Makes an array of all leaves in the tree.
+ * 
+ * clone(form)
+ * 
+ *     Creates a clone of the given tree
  */
 define(['jquery', 'util/functions'],function($, Functions){
 	'use strict';
@@ -118,6 +122,9 @@ define(['jquery', 'util/functions'],function($, Functions){
 			var result = [];
 			walkrec(form, Functions.identity, function(leaf){ result.push(leaf); }, postwalk);
 			return result;
+		},
+		clone    : function (form) {
+			return walkrec(form, Functions.identity, Functions.identity, prewalk);
 		}
 	};
 });
